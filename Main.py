@@ -16,3 +16,5 @@ bc.addNewBlock("Ben", "Gwyen", 225)
 printBlock(bc.getCurrentBlock())
 bc.addNewBlock("Hello", "Delhi", 1050)
 printBlock(bc.getCurrentBlock())
+
+print(bc.verifyIntegity())
