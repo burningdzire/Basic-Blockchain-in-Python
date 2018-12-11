@@ -1,15 +1,22 @@
+from datetime import datetime
+from HashGenerator import HashGenerator
+
 class Transaction:
-    def __init__(self, sender, receiver, amount, txnDateTime):
-        self.sender = sender
-        self.receiver = receiver
+
+    def __init__(self, senderAddress, receiverAddress, amount):
+        self.senderAdress = senderAddress
+        self.receiverAddress = receiverAddress
         self.amount = amount
-        self.txnDateTime = txnDateTime
+        self.txnDateTime = str(datetime.now())
 
-    def getSender(self):
-        return self.sender
+    def createHash(self):
+        return HashGenerator(self.senderAdress + self.receiverAddress + self.amount + self.txnDateTime)
 
-    def getReceiver(self):
-        return self.receiver
+    def getSenderAddress(self):
+        return self.senderAdress
+
+    def getReceiverAddress(self):
+        return self.receiverAddress
 
     def getAmount(self):
         return self.amount

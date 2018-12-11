@@ -1,18 +1,20 @@
 from HashGenerator import HashGenerator
 from datetime import datetime
+import json
 
 
 class Block:
-    def __init__(self, index, created, transaction, previousHash=""):
-        self.index = index
+    def __init__(self, created, transaction, previousHash=""):
         self.created = created
-        self.transaction = transaction
+        self.transactions = transaction
         self.previousHash = previousHash
         self.temp = 0
         self.currentHash = self.createHash()
 
     def createHash(self):
-        return HashGenerator(str(self.index) + self.created + self.transaction.getSender() + self.transaction.getReceiver() + self.previousHash + str(self.temp))
+        transactionsToJsonString = json.dumps(
+            [t.__dict__ for t in self.transactions])
+        return HashGenerator(self.created + transactionsToJsonString + self.previousHash + str(self.temp))
 
     def mineBlock(self, difficulty):
         while (self.currentHash[0:difficulty] != "0"*difficulty):
