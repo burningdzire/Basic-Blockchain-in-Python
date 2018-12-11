@@ -4,14 +4,17 @@ from Transaction import Transaction
 
 
 class BlockChain:
+    difficulty = 5
     def __init__(self):
         self.chain = []
         self.chain.append(self.createGenesisBlock())
 
     def createGenesisBlock(self):
         currTime = str(datetime.now())
-        genesisBlock = Transaction("TempSender", "TempReceiver", 100, currTime)
-        return Block(0, currTime, genesisBlock)
+        genesisTransaction = Transaction("TempSender", "TempReceiver", 100, currTime)
+        genesisBlock = Block(0, currTime, genesisTransaction)
+        genesisBlock.mineBlock(BlockChain.difficulty)
+        return genesisBlock
 
     def getCurrentBlock(self):
         currentBlock = self.chain[-1]
@@ -23,6 +26,7 @@ class BlockChain:
         newTransaction = Transaction(sender, receiver, amount, currTime)
         newBlock = Block(currentBlock.index+1, currTime,
                          newTransaction, currentBlock.currentHash)
+        newBlock.mineBlock(BlockChain.difficulty)
         self.chain.append(newBlock)
 
     def verifyIntegity(self):
