@@ -4,7 +4,7 @@
 <ol>
     <li> Transaction Format (Done) </li>
     <li> Hash Generaton (Done) </li>
-    <li> Block struture + slockchain Structure implementation </li>
+    <li> Block struture + Blockchain Structure implementation (Done) </li>
     <li> Key Generator (Incomplete).
         <ul> 
             <li> Code to implement generation of public key and private key. </li>
