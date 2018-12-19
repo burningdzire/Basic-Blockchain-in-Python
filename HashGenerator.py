@@ -8,5 +8,3 @@ from base64 import b64encode, b64decode
 def HashGenerator(input):
     result = hashlib.sha256(input.encode())
     return result.hexdigest()
-
-

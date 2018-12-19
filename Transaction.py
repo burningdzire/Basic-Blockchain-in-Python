@@ -15,10 +15,6 @@ class Transaction:
     def createHash(self):
         return HashGenerator(self.senderAdress + self.receiverAddress + self.amount + self.txnDateTime)
 
-    # def signTransaction(self, signingKey):
-    #     hashTxn = self.createHash()
-    #     sign = signingKey.sign()
-
     def getSenderAddress(self):
         return self.senderAdress
 

@@ -23,27 +23,19 @@ class BlockChain:
         currentBlock = self.chain[-1]
         return currentBlock
 
-    # def addNewBlock(self, sender, receiver, amount):
-    #     currentBlock = self.getCurrentBlock()
-    #     currTime = str(datetime.now())
-    #     newTransaction = Transaction(sender, receiver, amount, currTime)
-    #     newBlock = Block(currTime, newTransaction, currentBlock.currentHash)
-    #     newBlock.mineBlock(BlockChain.difficulty)
-    #     self.chain.append(newBlock)
-
     def minePendingTransactions(self, minerRewardAddress):
         currTime = str(datetime.now())
         newBlock = Block(currTime, self.pendingTransactions)
         newBlock.mineBlock(BlockChain.difficulty)
         self.chain.append(newBlock)
-        self.pendingTransactions = [Transaction(None, minerRewardAddress, self.miningReward)]
+        self.pendingTransactions = [Transaction(
+            None, minerRewardAddress, self.miningReward)]
 
     def addTransaction(self, newTransaction):
         self.pendingTransactions.append(newTransaction)
-    
 
     def getBalanceMiner(self, minerAddress):
-        balance = 0;
+        balance = 0
         for block in self.chain:
             for trans in block.transactions:
                 if trans.getSenderAddress() == minerAddress:
@@ -51,14 +43,13 @@ class BlockChain:
                 if trans.getReceiverAddress() == minerAddress:
                     balance += trans.amount
         return balance
-    
+
     def getAllTransaction(self):
         for trans in self.pendingTransactions:
             print(trans.getSenderAddress())
             print(trans.getReceiverAddress())
-            print(trans.getAmount(), "\n")            
+            print(trans.getAmount(), "\n")
 
-    
     def verifyIntegity(self):
         for i in range(1, len(self.chain)):
             prevBlock = self.chain[i-1]
